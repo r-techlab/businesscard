@@ -3,684 +3,587 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Product Listing</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <title>Minimal Business Card</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <style>
-        
-		:root {
-    --primary-color: #1976D2;
-    --secondary-color: #E3F2FD;
-    --accent-color: #FFFFFF;
-}
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --text: #1f2937;
+            --text-light: #6b7280;
+            --bg: #f9fafb;
+            --card-bg: #ffffff;
+            --border: #e5e7eb;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
-		body {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-}
-        .custom-header {
-    background-color: var(--primary-color);
-}
-
-        .custom-header .navbar-brand {
-    color: var(--accent-color);
-}
-        .product-card {
-            height: 100%;
-            transition: transform 0.3s ease;
-            background-color: #FFFFFF;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-        .product-image {
-            height: 200px;
-            object-fit: cover;
-        }
-        
-		#cartButton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    background-color: #4a4a4a;
-    border-color: #4a4a4a;
-    color: #ffffff;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    padding: 10px 20px;
-    font-size: 1.1em;
-}
-
-#cartButton:hover {
-    background-color: #333333;
-    border-color: #333333;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-}
-		
-        .quantity-control {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-        .quantity-input {
-            width: 40px;
-            text-align: center;
-            border: none;
-            background-color: transparent;
-        }
-        .footer {
-    background-color: var(--primary-color);
-    color: var(--accent-color);
-}
-        .product-heading {
-            font-size: 1.5em;
-            text-align: left;
-            margin-bottom: 15px;
-            color: #dbd08c;
-        }
-            .btn-outline-secondary {
-        padding: 0.375rem 0.75rem;
-    }
-	.quantity-display {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 60px;
-        height: 100%;
-    }
-        .btn-outline-secondary:hover {
-    color: var(--accent-color);
-    background-color: var(--primary-color);
-}
-       .footer .section {
-            flex: 1;
-            padding: 20px;
-            min-width: 200px;
-        }
-        .footer .section h3 {
-            margin-top: 0;
-        }
-        .footer .social-icons {
-            list-style: none;
-            padding: 0;
+        * {
+            box-sizing: border-box;
             margin: 0;
-            display: flex;
-            justify-content: left;
+            padding: 0;
         }
-        .footer .social-icons li {
-            margin: 0 10px;
-        }
-        .footer .social-icons a {
-            color: white;
-            text-decoration: none;
-            font-size: 24px;
-        }
-  #loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
 
-.spinner-border {
-    width: 3rem;
-    height: 3rem;
-}   
-.out-of-stock {
-        opacity: 0.7;
-    }
-    
-    .out-of-stock img {
-        filter: grayscale(100%);
-    }
-    
-    .out-of-stock .card-body {
-        position: relative;
-    }
-    
-    .text-danger.fw-bold {
-        font-size: 1.2em;
-        margin-top: auto;
-    }    
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+            border: 1px solid var(--border);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            padding: 24px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: rotate(30deg);
+            animation: shine 6s infinite;
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-20%, -20%); }
+            100% { transform: rotate(30deg) translate(20%, 20%); }
+        }
+
+        .profile-img-container {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 16px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .name {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .title {
+            font-size: 16px;
+            font-weight: 400;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .company {
+            font-size: 14px;
+            font-weight: 500;
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+        }
+
+        .card-body {
+            padding: 24px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+            margin-left: 12px;
+        }
+
+        .contact-list {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            padding: 12px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            flex-shrink: 0;
+            color: var(--primary);
+        }
+
+        .contact-icon svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .contact-details {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-bottom: 2px;
+        }
+
+        .contact-value {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(59, 130, 246, 0.1);
+            color: var(--primary);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .social-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .download-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 24px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .download-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .loading {
+            padding: 40px;
+            text-align: center;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .loading:after {
+            content: '...';
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                border-radius: 12px;
+            }
+            
+            .card-header {
+                padding: 20px;
+            }
+            
+            .profile-img-container {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .name {
+                font-size: 20px;
+            }
+            
+            .card-body {
+                padding: 20px;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animated {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
     </style>
 </head>
 <body>
-	<div id="loading-overlay">
-    <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
-    </div>
-	</div>
-    <!-- Updated Header -->
-    <header class="custom-header">
-    <nav class="navbar">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="#">Shop Name</a>
-            <div class="header-buttons d-flex align-items-center">
-				<a href="tel:" id="callButton" class="btn btn-primary me-3" title="Call us">
-				<i class="bi bi-telephone-fill fs-4"></i>
-				</a>
-				<a href="https://wa.me/" id="whatsappButton" class="btn btn-success me-3" target="_blank" title="Chat on WhatsApp">
-				<i class="bi bi-whatsapp fs-4"></i>
-				</a>
-				<a href="https://www.google.com/maps/dir/?api=1&destination=Facts+Computer+Software+House+LLC&origin=Facts+Computer+Software+House+LLC" id="glocation" class="btn btn-secondary" target="_blank" title="Location">
-				<i class="bi bi-geo-alt-fill fs-4"></i>
-				</a>
-			</div>
-
-        </div>
-    </nav>
-</header>
-
-    <div class="container py-4">
-        <h2 class="product-heading">Our Products</h2>
-        <div id="productCategories" class="mb-4">
-            <!-- Categories will be inserted here -->
-        </div>
-        <div class="input-group mb-4">
-            <input type="text" class="form-control" placeholder="Search products..." id="searchInput">
-            <button class="btn btn-outline-secondary" type="button" onclick="filterProducts()">Search</button>
-        </div>
-        <div id="productGrid" class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-4">
-            <!-- Products will be inserted here -->
-        </div>
-    </div>
-    <button id="cartButton" class="btn btn-primary btn-lg" style="display: none;">Proceed to Cart</button>
-
-    <!-- Cart Modal -->
-    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="cartModalBody">
-                <!-- Cart contents will be inserted here -->
-            </div>
-			<div class="form-group mt-3">
-                <label for="addressInput" class="form-label">Delivery Address (Optional):</label>
-                <textarea class="form-control" id="addressInput" rows="3" placeholder="Enter your delivery address (optional)"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" id="clearCartButton" onclick="clearCart()">Clear Cart</button>
-                <button type="button" class="btn btn-primary" id="proceedToWhatsApp">Proceed to WhatsApp</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- Footer -->
-    <footer class="footer mt-auto py-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>About Us</h5>
-                    <p>Shop Name is dedicated to providing high-quality products and excellent customer service.</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Contact</h5>
-                    <p>Email: info@yourshop.com<br>Phone: +1 234 567 8900</p>
-                </div>
-				<div class="col-md-4">
-                   <h5>Follow Us</h5> 
-                <ul class="social-icons">
-                    <li><a id="facebookLink"  href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a id="twitterLink"  href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                    <li><a id="instagramLink"  href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                    <li><a id="linkedinLink"  href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                </ul> 
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <p>&copy; 2024 Shop Name. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-	function debounce(func, wait) {
-    let timeout;
-    return function(...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-}
-		showLoading();
-		function showLoading() {
-    document.getElementById('loading-overlay').style.display = 'flex';
-}
-function hideLoading() {
-    document.getElementById('loading-overlay').style.display = 'none';
-}
-        // Replace with your Google Sheets API key
-        const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
-        // Replace with your Google Sheet ID
-        const SHEET_ID = '1JziliJ6oVkgMlm-Aa2jMc2s4LBSgHpZCoEaXTd9u9s0';
-        // Replace with your sheet name and extend the range to include columns R and S
-        const SHEET_NAME = 'Aquarium!A:S';
-
-        let cart = {};
-        let products = [];
-        let categories = [];
-        let shopName = 'Shop Name'; // Default value
-        let shopEmail = 'info@yourshop.com'; // Default value
-        let Phone = '000000'; // Default value
-		let Facebook = 'https://www.facebook.com'; // Default value
-		let Twitter = 'https://www.twitter.com'; // Default value
-		let Instagram = 'https://www.instagram.com'; // Default value
-		let Linkedin = 'https://www.linkedin.com'; // Default value
-		let Location = ''; // Default value
-
-        function initClient() {
-    showLoading(); // Show loading animation
-    gapi.client.init({
-        'apiKey': API_KEY,
-        'discoveryDocs': ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-    }).then(function () {
-        loadSheetsData();
-    }, function (error) {
-        console.log('Error initializing GAPI client: ' + error);
-        hideLoading(); // Hide loading animation in case of error
-    });
-}
-
-
-
-function loadSheetsData() {
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: SHEET_ID,
-        range: SHEET_NAME
-    }).then(function (response) {
-        const data = response.result.values;
-        const productGrid = document.getElementById('productGrid');
-
-        // Initialize variables for color customization
-        let primaryColor = '#1976D2'; // Default primary color
-        let secondaryColor = '#E3F2FD'; // Default secondary color
-        let accentColor = '#FFFFFF'; // Default accent color
-
-        // Skip the first row (header) and start from the second row
-        for (let i = 1; i < data.length; i++) {
-            const row = data[i];
-            if (row[17] === 'ShopName') {
-                shopName = row[18];
-                updateShopName();
-            }
-            if (row[17] === 'Email') {
-                shopEmail = row[18];
-            }
-            if (row[17] === 'Phone') {
-                Phone = row[18];
-            }
-            if (row[17] === 'Location') {
-                Location = row[18];
-            }
-            if (row[17] === 'Facebook') {
-                Facebook = row[18];
-            }
-            if (row[17] === 'Twitter') {
-                Twitter = row[18];
-            }
-            if (row[17] === 'Instagram') {
-                Instagram = row[18];
-            }
-            if (row[17] === 'Linkedin') {
-                Linkedin = row[18];
-            }
-            if (row[17] === 'Colour') {
-                [primaryColor, secondaryColor, accentColor] = row[18].split(',');
-                updateColors(primaryColor, secondaryColor, accentColor);
-            }
-            updateShopEmailPhone();
-            updateSocialMedia(Facebook, Twitter, Instagram, Linkedin);
-        }
-
-        // Process product data starting from the second row
-        for (let i = 1; i < data.length; i++) {
-            const row = data[i];
-            if (row[0] && row[1] && row[2]) {
-                products.push({ 
-                    code: row[0], 
-                    price: parseFloat(row[1]), 
-                    oldPrice: parseFloat(row[4]), 
-                    image: row[2], 
-                    category: row[3],
-					kg: parseFloat(row[5]) || 1, // New KG value, default to 1 if not provided		
-					stock: parseInt(row[6]) || 0					
-                });
-                if (!categories.includes(row[3])) {
-                    categories.push(row[3]);
-                }
-                const productCard = createProductCard(products.length - 1);
-                productGrid.appendChild(productCard);
-            }
-        }
-
-        renderCategories();
-        hideLoading(); // Hide loading animation when data is loaded and rendered
-    }, function (response) {
-        console.error('Error: ' + response.result.error.message);
-        hideLoading(); // Hide loading animation in case of error
-    });
-}
-
-
-function updateColors(primaryColor, secondaryColor, accentColor) {
-    document.documentElement.style.setProperty('--primary-color', primaryColor);
-    document.documentElement.style.setProperty('--secondary-color', secondaryColor);
-    document.documentElement.style.setProperty('--accent-color', accentColor);
-
-    // Update inline styles if necessary
-    document.querySelector('.custom-header').style.backgroundColor = primaryColor;
-    document.querySelector('.navbar-brand').style.color = accentColor;
-    document.querySelector('body').style.backgroundColor = secondaryColor;
-    document.querySelector('body').style.color = primaryColor;
-    document.querySelectorAll('.product-heading, .btn-outline-secondary').forEach(element => {
-        element.style.color = primaryColor;
-        element.style.borderColor = primaryColor;
-    });
-    document.querySelectorAll('.btn-outline-secondary:hover').forEach(element => {
-        element.style.color = accentColor;
-        element.style.backgroundColor = primaryColor;
-    });
-    document.querySelector('.footer').style.backgroundColor = primaryColor;
-    document.querySelector('.footer').style.color = accentColor;
-}
-
-
+    <div class="card">
+        <div id="loading" class="loading">Loading contact information</div>
         
-		// Update the createProductCard function to display KG information
-function createProductCard(index) {
-    const product = products[index];
-    const isOutOfStock = product.stock === 0;
-    const productCard = document.createElement('div');
-    productCard.className = 'col';
-    productCard.innerHTML = 
-        `<div class="card h-100 product-card ${isOutOfStock ? 'out-of-stock' : ''}">
-            <img src="${product.image}" class="card-img-top product-image" alt="${product.code}">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">${product.code}</h5>
-                <p class="card-text">
-                    ${product.oldPrice > product.price ? 
-                        `<span style="color: red;" class="text-decoration-line-through">AED ${product.oldPrice.toFixed(2)}</span><br>` : 
-                        ''}
-                    <span class="text-primary fw-bold">
-                        AED ${product.price.toFixed(2)}
-                        ${product.kg && product.kg !== 1 ? `/Kg` : ''}
-                    </span>
-                </p>
-                ${isOutOfStock ? 
-                    '<p class="text-danger fw-bold">Out of Stock</p>' :
-                    `<div class="mt-auto">
-                        <div class="d-flex align-items-center">
-                            <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(${index}, -1)">
-                                <i class="bi bi-dash"></i>
-                            </button>
-                            <div class="mx-2 text-center" style="min-width: 60px;">
-                                <span id="quantity-${index}">${cart[index] || 0}</span>
-                            </div>
-                            <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(${index}, 1)">
-                                <i class="bi bi-plus"></i>
-                            </button>
+        <div id="profile" style="display: none;">
+            <div class="card-header">
+                <div class="profile-img-container">
+                    <img id="profile-image" src="" alt="Profile Image" class="profile-img">
+                </div>
+                <h1 id="full-name" class="name"></h1>
+                <p id="job-title" class="title"></p>
+                <p id="company" class="company"></p>
+            </div>
+
+            <div class="card-body">
+                <h3 class="section-title">Contact</h3>
+                <ul class="contact-list">
+                    <li class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
                         </div>
-                    </div>`
-                }
-            </div>
-        </div>`;
-    return productCard;
-}
+                        <div class="contact-details">
+                            <div class="contact-label">Email</div>
+                            <div id="email" class="contact-value"></div>
+                        </div>
+                    </li>
+                    <a id="phone-item" href="#" style="text-decoration: none; color: inherit;">
+                        <li class="contact-item">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                                </svg>
+                            </div>
+                            <div class="contact-details">
+                                <div class="contact-label">Phone</div>
+                                <div id="phone" class="contact-value"></div>
+                            </div>
+                        </li>
+                    </a>
+                    <li class="contact-item">
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                                <circle cx="12" cy="10" r="3"></circle>
+                            </svg>
+                        </div>
+                        <div class="contact-details">
+                            <div class="contact-label">Address</div>
+                            <div id="address" class="contact-value"></div>
+                        </div>
+                    </li>
+                </ul>
 
-        function renderCategories() {
-    const categoryContainer = document.getElementById('productCategories');
-    categoryContainer.innerHTML = 
-        `<button class="btn btn-primary m-1" onclick="setCategoryAndFilter('All')">All</button>
-        ${categories.map(category => 
-            `<button class="btn btn-outline-secondary m-1" onclick="setCategoryAndFilter('${category}')">${category}</button>`
-        ).join('')}`;
-}
-
-        function filterProducts() {
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    const currentCategory = document.querySelector('#productCategories .btn-primary').textContent;
-    const productGrid = document.getElementById('productGrid');
-    productGrid.innerHTML = '';
-
-    products.forEach((product, index) => {
-        const matchesCategory = currentCategory === 'All' || product.category === currentCategory;
-        const matchesSearch = product.code.toLowerCase().includes(searchInput);
-
-        if (matchesCategory && matchesSearch) {
-            const productCard = createProductCard(index);
-            productGrid.appendChild(productCard);
-        }
-    });
-}
-function setCategoryAndFilter(category) {
-    const buttons = document.querySelectorAll('#productCategories .btn');
-    buttons.forEach(btn => {
-        btn.classList.remove('btn-primary');
-        btn.classList.add('btn-outline-secondary');
-    });
-    event.target.classList.remove('btn-outline-secondary');
-    event.target.classList.add('btn-primary');
-    filterProducts();
-}
-        function updateShopName() {
-            // Update shop name in navbar
-            document.querySelector('.navbar-brand').textContent = shopName;
-
-            // Update shop name in footer
-            document.querySelector('.footer h5').textContent = 'About ' + shopName;
-            document.querySelector('.footer p').textContent = shopName + ' is dedicated to providing high-quality products and excellent customer service.';
-            document.querySelector('.footer .text-center p').textContent = '© 2024 ' + shopName + '. All rights reserved.';
-        }
-
-        function updateShopEmailPhone() {
-            // Update shop email in footer
-            document.querySelector('.footer .col-md-4:nth-child(2) p').innerHTML = `Email: ${shopEmail}<br>Phone: ${Phone}`;
-            document.getElementById('callButton').href = `tel:+${Phone}`;
-            document.getElementById('whatsappButton').href = `https://wa.me/${Phone}`;
-			document.getElementById('glocation').href = `${Location}`;
-        }
-        function updateSocialMedia(Facebook,Twitter,Instagram,Linkedin) {
-			document.getElementById('facebookLink').href = Facebook; 
-			document.getElementById('twitterLink').href = Twitter; 
-			document.getElementById('instagramLink').href = Instagram; 
-			document.getElementById('linkedinLink').href = Linkedin; 
-			 
-			}
-
-function changeQuantity(index, change) {
-    const product = products[index];
-    
-    // Check if product is out of stock
-    if (product.stock === 0) {
-        return; // Do nothing if out of stock
-    }
-    
-    const kgIncrement = product.kg;
-    const quantitySpan = document.getElementById(`quantity-${index}`);
-    const modalQuantitySpan = document.getElementById(`modal-quantity-${index}`);
-    
-    let currentQuantity = cart[index] || 0;
-    let newQuantity = currentQuantity + (change * kgIncrement);
-    
-    // Ensure new quantity doesn't exceed available stock
-    newQuantity = Math.min(Math.max(0, newQuantity), product.stock);
-
-    if (newQuantity === 0) {
-        delete cart[index];
-    } else {
-        cart[index] = newQuantity;
-    }
-
-    // Update main product grid
-    if (quantitySpan) {
-        quantitySpan.textContent = newQuantity;
-    }
-
-    // Update cart modal if it's open
-    if (modalQuantitySpan) {
-        modalQuantitySpan.textContent = newQuantity;
-        const itemTotal = product.price * newQuantity;
-        const modalTotalSpan = document.getElementById(`modal-total-${index}`);
-        if (modalTotalSpan) {
-            modalTotalSpan.textContent = `AED ${itemTotal.toFixed(2)}`;
-        }
-
-        // Recalculate and update grand total
-        let grandTotal = 0;
-        for (const [idx, qty] of Object.entries(cart)) {
-            grandTotal += products[idx].price * qty;
-        }
-        const modalGrandTotal = document.getElementById('modal-grand-total');
-        if (modalGrandTotal) {
-            modalGrandTotal.textContent = `AED ${grandTotal.toFixed(2)}`;
-        }
-    }
-
-    updateCartButton();
-}
-
-        function updateCartButton() {
-            const cartButton = document.getElementById('cartButton');
-            const totalItems = Object.values(cart).reduce((a, b) => a + b, 0);
-            const totalPrice = Object.entries(cart).reduce((total, [index, quantity]) => {
-                return total + (products[index].price * quantity);
-            }, 0);
-
-            if (totalItems > 0) {
-                cartButton.style.display = 'block';
-                cartButton.textContent = `Proceed to Cart (${totalItems} items, AED ${totalPrice.toFixed(2)})`;
-            } else {
-                cartButton.style.display = 'none';
-            }
-        }
-
-        function clearCart() {
-    cart = {};
-    // Update quantity displays in product cards
-    products.forEach((product, index) => {
-        const quantitySpan = document.getElementById(`quantity-${index}`);
-        if (quantitySpan) {
-            quantitySpan.textContent = '0';
-        }
-    });
-    updateCartButton();
-
-    // Hide the cart modal
-    const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
-    if (cartModal) {
-        cartModal.hide();
-    }
-}
-
-
-function showCartModal() {
-    const modalBody = document.getElementById('cartModalBody');
-    let cartContent = '<ul class="list-group">';
-    let total = 0;
-
-    for (const [index, quantity] of Object.entries(cart)) {
-        const product = products[index];
-        const itemTotal = product.price * quantity;
-        total += itemTotal;
-        cartContent += 
-            `<li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                    <button class="btn btn-sm btn-outline-secondary me-2" onclick="changeQuantity(${index}, -1)">-</button>
-                    <span id="modal-quantity-${index}">${quantity}</span>
-                    <button class="btn btn-sm btn-outline-secondary ms-2" onclick="changeQuantity(${index}, 1)">+</button>
-                    ${product.code}  
-                    <span class="text-primary">AED ${product.price.toFixed(2)} ${product.kg && product.kg !== 1 ? `/Kg` : ''}</span>
+                <h3 class="section-title">Connect</h3>
+                <div id="social-links" class="social-links">
+                    <!-- Social links will be inserted here by JavaScript -->
                 </div>
-                <span id="modal-total-${index}">AED ${itemTotal.toFixed(2)}</span>
-            </li>`;
-    }
 
-    cartContent += 
-        `<li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
-            Total
-            <span id="modal-grand-total">AED ${total.toFixed(2)}</span>
-        </li>
-    </ul>`;
+                <a href="#" class="download-btn" onclick="downloadContact(event)">Save to Contacts</a>
+            </div>
+        </div>
+    </div>
 
-    modalBody.innerHTML = cartContent;
+    <script>
+        // Google Sheets ID and API key
+        const SHEET_ID = '1IpgOJOIXEOlWaKhPXFAV4kWGJVw8WlfIaJHWicFSK-c';
+        const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
+        const SHEET_NAME = 'BusinessCard';
 
-    const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
-    cartModal.show();
-}
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const contactId = urlParams.get('id') || '111';
 
-        function searchProducts() {
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    const productCards = document.querySelectorAll('.product-card');
+            const loadingElement = document.getElementById('loading');
+            const profileElement = document.getElementById('profile');
 
-    productCards.forEach((card, index) => {
-        const productName = products[index].code.toLowerCase();
-        if (productName.includes(searchInput)) {
-            card.parentElement.style.display = '';
-        } else {
-            card.parentElement.style.display = 'none';
-        }
-    });
-}
-
-        document.getElementById('cartButton').onclick = function () {
-            if (Object.keys(cart).length > 0) {
-                showCartModal();
-            } else {
-                alert('Your cart is empty!');
+            if (!contactId) {
+                loadingElement.textContent = 'Error: No contact ID provided. Add ?id=YOUR_ID to the URL.';
+                return;
             }
-        };
 
-        document.getElementById('proceedToWhatsApp').onclick = function () {
-        const address = document.getElementById('addressInput').value.trim();
+            fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Network error: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const rows = data.values;
+                    if (rows && rows.length > 0) {
+                        const headers = rows[0].map(header => header.toLowerCase().trim());
+                        const idColumnIndex = headers.indexOf('id');
+
+                        if (idColumnIndex === -1) {
+                            loadingElement.textContent = "Error: 'Id' column not found in the sheet.";
+                            return;
+                        }
+
+                        let foundProfileData = null;
+                        for (let i = 1; i < rows.length; i++) {
+                            const currentRow = rows[i];
+                            if (currentRow.length > idColumnIndex && currentRow[idColumnIndex] && currentRow[idColumnIndex].trim().toLowerCase() === contactId.trim().toLowerCase()) {
+                                foundProfileData = currentRow;
+                                break;
+                            }
+                        }
+
+                        if (foundProfileData) {
+                            loadingElement.style.display = 'none';
+                            profileElement.style.display = 'block';
+                            profileElement.classList.add('animated');
+
+                            const profile = {};
+                            headers.forEach((header, index) => {
+                                const normalizedHeader = header;
+                                profile[normalizedHeader] = index < foundProfileData.length ? foundProfileData[index] : '';
+                            });
+                            
+                            populateCard(profile);
+                        } else {
+                            loadingElement.textContent = `Contact with ID '${contactId}' not found.`;
+                        }
+                    } else {
+                        loadingElement.textContent = 'No data found in the sheet.';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    loadingElement.textContent = 'Error loading contact: ' + error.message;
+                });
+        });
         
-        let message = "I'd like to order the following items:\n\n";
-        let total = 0;
-        for (const [index, quantity] of Object.entries(cart)) {
-            const product = products[index];
-            const itemTotal = product.price * quantity;
-            total += itemTotal;
-            message += `${quantity}x ${product.code} - AED ${product.price.toFixed(2)} each = AED ${itemTotal.toFixed(2)}\n`;
+        function populateCard(data) {
+            // Set profile image with fallback
+            const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
+            const googleDriveImageBase = 'https://lh3.googleusercontent.com/d/';
+            const imageId = data.image_id;
+            const profileImageUrl = imageId 
+                ? `${googleDriveImageBase}${imageId}=s220?authuser=0`
+                : defaultImage;
+            
+            document.getElementById('profile-image').src = data.profileimage || profileImageUrl || defaultImage;
+            document.getElementById('full-name').textContent = data.fullname || data['full name'] || '';
+            document.getElementById('job-title').textContent = data.jobtitle || data['job title'] || '';
+            document.getElementById('company').textContent = data.company || '';
+            
+            // Contact info
+            document.getElementById('email').textContent = data.email || '';
+            const phoneValue = data.phone || '';
+            document.getElementById('phone').textContent = phoneValue;
+            document.getElementById('phone-item').href = phoneValue ? `tel:${phoneValue}` : '#';
+            document.getElementById('address').textContent = data.address || '';
+            
+            // Social links
+            const socialLinksContainer = document.getElementById('social-links');
+            socialLinksContainer.innerHTML = ''; 
+            
+            const socialPlatformsMap = {
+                'linkedin': ['linkedin', 'linkedinurl', 'linkedin url', 'linkedin_url'],
+                'whatsapp': ['whatsapp', 'whatsappurl', 'whatsapp url', 'whatsapp_url'],
+                'instagram': ['instagram', 'instagramurl', 'instagram url', 'instagram_url'],
+                'facebook': ['facebook', 'facebookurl', 'facebook url', 'facebook_url'],
+                'twitter': ['twitter', 'twitterurl', 'twitter url', 'twitter_url'],
+                'github': ['github', 'githuburl', 'github url', 'github_url']
+            };
+            
+            let socialLinksFound = 0;
+            for (const [platform, variations] of Object.entries(socialPlatformsMap)) {
+                let socialUrl = null;
+                
+                for (const variant of variations) {
+                    if (data[variant] && String(data[variant]).trim() !== '') {
+                        socialUrl = String(data[variant]).trim();
+                        break;
+                    }
+                }
+                
+                if (socialUrl) {
+                    socialLinksFound++;
+                    if (!socialUrl.startsWith('http://') && !socialUrl.startsWith('https://') && !socialUrl.startsWith('mailto:') && !socialUrl.startsWith('tel:')) {
+                        if (platform === 'whatsapp' && /^\d+$/.test(socialUrl.replace(/\D/g,''))) {
+                            socialUrl = `https://wa.me/${socialUrl.replace(/\D/g,'')}`;
+                        } else {
+                            socialUrl = 'https://' + socialUrl;
+                        }
+                    }
+                    
+                    const link = document.createElement('a');
+                    link.href = socialUrl;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    link.title = platform.charAt(0).toUpperCase() + platform.slice(1);
+                    link.className = 'social-link';
+                    link.setAttribute('aria-label', platform);
+                    
+                    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                    svg.setAttribute('viewBox', '0 0 24 24');
+                    svg.setAttribute('fill', 'none');
+                    svg.setAttribute('stroke', 'currentColor');
+                    svg.setAttribute('stroke-width', '2');
+                    
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    path.setAttribute('d', getSocialIconPath(platform));
+                    svg.appendChild(path);
+                    
+                    link.appendChild(svg);
+                    socialLinksContainer.appendChild(link);
+                }
+            }
+            
+            if (socialLinksFound === 0) {
+                const noSocialMsg = document.createElement('p');
+                noSocialMsg.textContent = 'No social links provided';
+                noSocialMsg.style.color = 'var(--text-light)';
+                noSocialMsg.style.fontSize = '14px';
+                noSocialMsg.style.textAlign = 'center';
+                noSocialMsg.style.width = '100%';
+                socialLinksContainer.appendChild(noSocialMsg);
+            }
         }
-        message += `\nTotal: AED ${total.toFixed(2)}`;
         
-        // Only add address to message if one was provided
-        if (address) {
-            message += `\n\nDelivery Address:\n${address}`;
+        function getSocialIconPath(platform) {
+            const icons = {
+                linkedin: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z M2 9h4v12H2z M6 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z',
+                whatsapp: 'M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z',
+                instagram: 'M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z',
+                facebook: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z',
+                twitter: 'M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z',
+                github: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22'
+            };
+            return icons[platform] || '';
         }
         
-        message += "\n\nPlease confirm my order. Thank you!";
+        function downloadContact(e) {
+            e.preventDefault();
+            
+            const fullName = document.getElementById('full-name').textContent;
+            const jobTitle = document.getElementById('job-title').textContent;
+            const email = document.getElementById('email').textContent;
+            const phone = document.getElementById('phone').textContent;
+            const address = document.getElementById('address').textContent;
+            const company = document.getElementById('company').textContent;
+            
+            const socialLinks = {};
+            document.querySelectorAll('#social-links a').forEach(link => {
+                const platform = link.title.toLowerCase();
+                socialLinks[platform] = link.href;
+            });
+            
+            let vCard = `BEGIN:VCARD
+VERSION:3.0
+FN:${fullName}
+N:${fullName.split(' ').reverse().join(';')};;;
+TITLE:${jobTitle}
+ORG:${company}
+EMAIL:${email}
+TEL;TYPE=CELL:${phone}
+ADR;TYPE=WORK:;;${address.replace(/\n/g, '\\n')}
+`;
 
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappLink = `https://wa.me/${Phone}?text=${encodedMessage}`;
+            // Add social links
+            if (socialLinks.linkedin) vCard += `URL;type=LinkedIn:${socialLinks.linkedin}\n`;
+            if (socialLinks.instagram) vCard += `URL;type=Instagram:${socialLinks.instagram}\n`;
+            if (socialLinks.facebook) vCard += `URL;type=Facebook:${socialLinks.facebook}\n`;
+            if (socialLinks.twitter) vCard += `URL;type=Twitter:${socialLinks.twitter}\n`;
+            if (socialLinks.github) vCard += `URL;type=GitHub:${socialLinks.github}\n`;
+            if (socialLinks.whatsapp) vCard += `URL;type=WhatsApp:${socialLinks.whatsapp}\n`;
 
-        window.open(whatsappLink, '_blank');
+            vCard += `END:VCARD`;
 
-        clearCart();
-    };
-
-        gapi.load('client', initClient);
-		document.getElementById('searchInput').oninput = debounce(filterProducts, 300);
+            const blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8' });
+            const url = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${fullName.toLowerCase().replace(/\s+/g, '_')}_contact.vcf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(url);
+        }
     </script>
 </body>
 </html>
