@@ -573,6 +573,38 @@
             outline: 2px solid var(--primary);
             outline-offset: 2px;
         }
+textarea {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    border: 2px solid var(--gray-200);
+    border-radius: 16px;
+    font-size: 1rem;
+    font-weight: 400;
+    font-family: 'Inter', sans-serif;
+    color: var(--gray-800);
+    background: var(--white);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    outline: none;
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.5;
+}
+
+textarea:focus {
+    border-color: var(--primary);
+    box-shadow: 
+        0 0 0 4px rgba(99, 102, 241, 0.1),
+        0 8px 24px rgba(99, 102, 241, 0.15);
+    transform: translateY(-2px);
+}
+
+textarea:not(:placeholder-shown) {
+    border-color: var(--success);
+}
+
+textarea::placeholder {
+    color: var(--gray-400);
+}
     </style>
 </head>
 <body>
@@ -660,11 +692,11 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="address">Address</label>
-                    <div class="input-wrapper">
-                        <input type="text" id="address" name="address" placeholder="Your business address">
-                    </div>
-                </div>
+    <label for="address">Address</label>
+    <div class="input-wrapper">
+        <textarea id="address" name="address" placeholder="Your business address" rows="4"></textarea>
+    </div>
+</div>
 
                 <div class="two-column">
                     <div class="form-group">
