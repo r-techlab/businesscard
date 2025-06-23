@@ -495,6 +495,19 @@
             box-shadow: 0 12px 32px rgba(71, 85, 105, 0.4);
         }
 
+        /* Disabled button styles */
+        .btn-primary:disabled {
+            background: linear-gradient(135deg, var(--gray-400), var(--gray-500));
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+            opacity: 0.7;
+        }
+
+        .btn-primary:disabled::before {
+            display: none;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
             body {
@@ -675,7 +688,7 @@ textarea::placeholder {
                         <input type="text" id="jobTitle" name="jobTitle" placeholder="Your professional title">
                     </div>
                 </div>
-				
+                
                 <div class="form-group">
                     <label for="company">Company</label>
                     <div class="input-wrapper">
@@ -699,11 +712,11 @@ textarea::placeholder {
                 </div>
 
                 <div class="form-group">
-    <label for="address">Address</label>
-    <div class="input-wrapper">
-        <textarea id="address" name="address" placeholder="Your business address" rows="4"></textarea>
-    </div>
-</div>
+                    <label for="address">Address</label>
+                    <div class="input-wrapper">
+                        <textarea id="address" name="address" placeholder="Your business address" rows="4"></textarea>
+                    </div>
+                </div>
 
                 <div class="two-column">
                     <div class="form-group">
@@ -751,7 +764,7 @@ textarea::placeholder {
             </div>
 
             <div class="button-group">
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-primary" id="saveButton">
                     Save Changes
                 </button>
                 <button type="button" id="changePasswordBtn" class="btn btn-secondary">
@@ -837,7 +850,7 @@ textarea::placeholder {
                         document.getElementById('fullName').value = profile.fullname || profile.full_name || '';
                         document.getElementById('profileImage').value = profile.profileimage || profile.profile_image || '';
                         document.getElementById('jobTitle').value = profile.jobtitle || profile.job_title || '';
-						document.getElementById('company').value = profile.company  || '';
+                        document.getElementById('company').value = profile.company  || '';
                         document.getElementById('email').value = profile.email || '';
                         document.getElementById('phone').value = profile.phone || '';
                         document.getElementById('address').value = profile.address || '';
@@ -864,8 +877,12 @@ textarea::placeholder {
         document.getElementById('edit-form').addEventListener('submit', function(e) {
             e.preventDefault();
             const statusDiv = document.getElementById('status');
-
-            // Show loading
+            const saveButton = document.getElementById('saveButton');
+            
+            // Disable save button and show loading
+            saveButton.disabled = true;
+            saveButton.innerHTML = '<span class="loading-spinner"></span> Saving...';
+            
             statusDiv.className = 'status-message loading';
             statusDiv.innerHTML = '<span class="loading-spinner"></span>Saving your changes...';
             statusDiv.style.display = 'block';
@@ -876,7 +893,7 @@ textarea::placeholder {
                 fullName: document.getElementById('fullName').value,
                 profileImage: document.getElementById('profileImage').value,
                 jobTitle: document.getElementById('jobTitle').value,
-				company: document.getElementById('company').value,
+                company: document.getElementById('company').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
                 address: document.getElementById('address').value,
@@ -887,11 +904,11 @@ textarea::placeholder {
                 twitter_url: document.getElementById('twitter_url').value,
                 entered_password: document.getElementById('entered_password').value,
                 current_password: document.getElementById('current_password').value,
-				
-				fileData: document.getElementById('fileData').value,
+                
+                fileData: document.getElementById('fileData').value,
                 mimeType: document.getElementById('mimeType').value,
                 fileName: document.getElementById('fileNameHidden').value, 
-				
+                
                 action: 'update'
             };
 
@@ -935,6 +952,7 @@ textarea::placeholder {
             .catch(error => {
                 console.error('JSON request failed:', error);
                 statusDiv.innerHTML = '<span class="loading-spinner"></span>Retrying with alternative method...';
+                
                 // Fallback to FormData request
                 const formDataObj = new FormData();
                 for (const [key, value] of Object.entries(formData)) {
@@ -942,37 +960,42 @@ textarea::placeholder {
                 }
 
                 console.log('Sending FormData request to:', APPS_SCRIPT_URL);
-                fetch(APPS_SCRIPT_URL, {
+                return fetch(APPS_SCRIPT_URL, {
                     method: 'POST',
                     body: formDataObj,
                     mode: 'cors'
-                })
-                .then(response => {
-                    console.log('FormData response status:', response.status, response.statusText);
-                    return response.text().then(text => ({ response, text }));
-                })
-                .then(({ response, text }) => {
-                    console.log('Raw response (FormData):', text);
-                    try {
-                        const data = JSON.parse(text);
-                        if (data.status === 'success') {
-                            statusDiv.className = 'status-message success';
-                            statusDiv.textContent = '✅ Changes saved successfully!';
-                            setTimeout(() => {
-                                statusDiv.style.display = 'none';
-                            }, 3000);
-                        } else {
-                            throw new Error(data.message || 'Failed to save changes');
-                        }
-                    } catch (error) {
-                        throw new Error(`Invalid JSON response: ${text}`);
-                    }
-                })
-                .catch(formDataError => {
-                    console.error('FormData request failed:', formDataError);
-                    statusDiv.className = 'status-message error';
-                    statusDiv.textContent = '❌ Error saving changes: ' + formDataError.message;
                 });
+            })
+            .then(response => {
+                console.log('FormData response status:', response.status, response.statusText);
+                return response.text().then(text => ({ response, text }));
+            })
+            .then(({ response, text }) => {
+                console.log('Raw response (FormData):', text);
+                try {
+                    const data = JSON.parse(text);
+                    if (data.status === 'success') {
+                        statusDiv.className = 'status-message success';
+                        statusDiv.textContent = '✅ Changes saved successfully!';
+                        setTimeout(() => {
+                            statusDiv.style.display = 'none';
+                        }, 3000);
+                    } else {
+                        throw new Error(data.message || 'Failed to save changes');
+                    }
+                } catch (error) {
+                    throw new Error(`Invalid JSON response: ${text}`);
+                }
+            })
+            .catch(error => {
+                console.error('FormData request failed:', error);
+                statusDiv.className = 'status-message error';
+                statusDiv.textContent = '❌ Error saving changes: ' + error.message;
+            })
+            .finally(() => {
+                // Re-enable save button regardless of success/failure
+                saveButton.disabled = false;
+                saveButton.textContent = 'Save Changes';
             });
         });
 
