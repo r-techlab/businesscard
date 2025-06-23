@@ -679,7 +679,7 @@ textarea::placeholder {
                 <div class="form-group">
                     <label for="company">Company</label>
                     <div class="input-wrapper">
-                        <input type="text" id="company" name="company" placeholder="Your comany name">
+                        <input type="text" id="company" name="company" placeholder="Your professional title">
                     </div>
                 </div>
 
@@ -767,7 +767,7 @@ textarea::placeholder {
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
         const SHEET_NAME = 'BusinessCard';
         // Replace with your Apps Script web app URL
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw5gKJ1OliEXT0vwED6w4rebVlyzc81O30vHVJXsyH0gvYv6jWa6PkGMz8UKwdOLmM/exec';
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFgCqBbpbqwjbSu1LuAfSFAaezatpi15qjHe4XenPCocXISOtcWo6HdRLQ12L7PnY/exec';
 
         // Get ID from URL parameter
         function getIdFromUrl() {
@@ -837,7 +837,7 @@ textarea::placeholder {
                         document.getElementById('fullName').value = profile.fullname || profile.full_name || '';
                         document.getElementById('profileImage').value = profile.profileimage || profile.profile_image || '';
                         document.getElementById('jobTitle').value = profile.jobtitle || profile.job_title || '';
-						document.getElementById('company').value = profile.company   || '';
+						document.getElementById('company').value = profile.company  || '';
                         document.getElementById('email').value = profile.email || '';
                         document.getElementById('phone').value = profile.phone || '';
                         document.getElementById('address').value = profile.address || '';
