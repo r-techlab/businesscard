@@ -675,6 +675,13 @@ textarea::placeholder {
                         <input type="text" id="jobTitle" name="jobTitle" placeholder="Your professional title">
                     </div>
                 </div>
+				
+                <div class="form-group">
+                    <label for="company">Company</label>
+                    <div class="input-wrapper">
+                        <input type="text" id="company" name="company" placeholder="Your comany name">
+                    </div>
+                </div>
 
                 <div class="two-column">
                     <div class="form-group">
@@ -830,6 +837,7 @@ textarea::placeholder {
                         document.getElementById('fullName').value = profile.fullname || profile.full_name || '';
                         document.getElementById('profileImage').value = profile.profileimage || profile.profile_image || '';
                         document.getElementById('jobTitle').value = profile.jobtitle || profile.job_title || '';
+						document.getElementById('company').value = profile.company   || '';
                         document.getElementById('email').value = profile.email || '';
                         document.getElementById('phone').value = profile.phone || '';
                         document.getElementById('address').value = profile.address || '';
@@ -868,6 +876,7 @@ textarea::placeholder {
                 fullName: document.getElementById('fullName').value,
                 profileImage: document.getElementById('profileImage').value,
                 jobTitle: document.getElementById('jobTitle').value,
+				company: document.getElementById('company').value,
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value,
                 address: document.getElementById('address').value,
