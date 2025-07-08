@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minimal Business Card</title>
+    <title>Business Card</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <style>
         :root {
@@ -304,6 +304,24 @@
         .animated {
             animation: fadeIn 0.6s ease-out forwards;
         }
+		.edit-button {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 50%;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+    transition: background 0.3s ease;
+    z-index: 2;
+}
+
+.edit-button:hover {
+    background: rgba(255, 255, 255, 0.4);
+}
     </style>
 </head>
 <body>
@@ -315,6 +333,7 @@
                 <div class="profile-img-container">
                     <img id="profile-image" src="" alt="Profile Image" class="profile-img">
                 </div>
+				<a id="edit-btn" class="edit-button" href="#" title="Edit">&#9998;</a>
                 <h1 id="full-name" class="name"></h1>
                 <p id="job-title" class="title"></p>
                 <p id="company" class="company"></p>
@@ -381,7 +400,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const contactId = urlParams.get('id') || '111';
-
+			
+			// Set href of edit button
+			const editButton = document.getElementById('edit-btn');
+			if (editButton && contactId) {
+				editButton.href = `update.html?id=${encodeURIComponent(contactId)}`;
+			}
+			
             const loadingElement = document.getElementById('loading');
             const profileElement = document.getElementById('profile');
 
