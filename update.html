@@ -199,7 +199,21 @@
         .form-group.half {
             grid-column: span 1;
         }
+.card-id {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--gray-600);
+    background: rgba(255, 255, 255, 0.7);
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    display: inline-block;
+    font-weight: 500;
+}
 
+.card-id span {
+    font-weight: 600;
+    color: var(--primary);
+}
         .two-column {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -632,6 +646,7 @@ textarea::placeholder {
         <div class="header">
             <h1>Edit Business Card</h1>
             <p class="subtitle">Update your professional information</p>
+			<p class="card-id">Card ID: <span id="displayId"></span></p>
         </div>
 
         <div id="status" class="status-message loading">
@@ -794,6 +809,9 @@ textarea::placeholder {
             const recordId = getIdFromUrl();
             document.getElementById('recordId').value = recordId;
             
+			// Add this line to display the ID:
+			document.getElementById('displayId').textContent = recordId;
+	
             // Set up change password button
             document.getElementById('changePasswordBtn').addEventListener('click', function() {
                 window.location.href = `change-password.html?id=${recordId}`;
