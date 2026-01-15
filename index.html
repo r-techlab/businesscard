@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Business Card</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #2563eb;
@@ -13,9 +14,9 @@
             --text: #1f2937;
             --text-light: #6b7280;
             --bg: #f9fafb;
-            --card-bg: #f0f4ff;
+            --card-bg: #ffffff;
             --border: #e5e7eb;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -26,7 +27,7 @@
         }
 
         body {
-            font-family: 'Inter', sans-serif;
+            font-family: 'Poppins', sans-serif;
             background-color: var(--bg);
             color: var(--text);
             min-height: 100vh;
@@ -34,15 +35,15 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .card {
             background: var(--card-bg);
-            border-radius: 16px;
+            border-radius: 24px;
             box-shadow: var(--shadow);
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             overflow: hidden;
             position: relative;
             transition: var(--transition);
@@ -50,13 +51,13 @@
         }
 
         .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
         }
 
         .card-header {
             background: linear-gradient(135deg, var(--primary), var(--primary-light));
-            padding: 24px;
+            padding: 40px 30px 30px;
             text-align: center;
             color: white;
             position: relative;
@@ -72,7 +73,7 @@
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
             transform: rotate(30deg);
-            animation: shine 6s infinite;
+            animation: shine 8s infinite linear;
         }
 
         @keyframes shine {
@@ -81,14 +82,20 @@
         }
 
         .profile-img-container {
-            width: 120px;
-            height: 120px;
-            margin: 0 auto 16px;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 20px;
             border-radius: 50%;
-            border: 4px solid rgba(255, 255, 255, 0.3);
+            border: 5px solid rgba(255, 255, 255, 0.4);
             overflow: hidden;
             position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transition: var(--transition);
+        }
+
+        .card:hover .profile-img-container {
+            transform: scale(1.05);
+            border-color: rgba(255, 255, 255, 0.6);
         }
 
         .profile-img {
@@ -99,41 +106,48 @@
         }
 
         .name {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 700;
-            margin-bottom: 4px;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
         }
 
         .title {
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 400;
-            opacity: 0.9;
-            margin-bottom: 8px;
+            opacity: 0.95;
+            margin-bottom: 10px;
         }
 
         .company {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 500;
             display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 4px 12px;
-            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.25);
+            padding: 8px 18px;
+            border-radius: 25px;
             backdrop-filter: blur(5px);
+            margin-bottom: 5px;
         }
 
         .card-body {
-            padding: 24px;
+            padding: 30px;
         }
 
         .section-title {
-            font-size: 14px;
+            font-size: 15px;
             font-weight: 600;
             color: var(--primary);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
+        }
+
+        .section-title i {
+            margin-right: 10px;
+            font-size: 16px;
         }
 
         .section-title::after {
@@ -141,43 +155,44 @@
             flex: 1;
             height: 1px;
             background: var(--border);
-            margin-left: 12px;
+            margin-left: 15px;
         }
 
         .contact-list {
             list-style: none;
-            margin-bottom: 24px;
+            margin-bottom: 30px;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
-            margin-bottom: 12px;
-            padding: 12px;
-            border-radius: 8px;
+            margin-bottom: 15px;
+            padding: 16px;
+            border-radius: 12px;
             transition: var(--transition);
+            text-decoration: none;
+            color: inherit;
+            border: 1px solid transparent;
         }
 
         .contact-item:hover {
-            background: rgba(59, 130, 246, 0.05);
+            background: rgba(59, 130, 246, 0.08);
+            border-color: rgba(59, 130, 246, 0.2);
+            transform: translateX(5px);
         }
 
         .contact-icon {
-            width: 40px;
-            height: 40px;
-            background: rgba(59, 130, 246, 0.1);
-            border-radius: 8px;
+            width: 48px;
+            height: 48px;
+            background: rgba(59, 130, 246, 0.12);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-right: 12px;
+            margin-right: 16px;
             flex-shrink: 0;
             color: var(--primary);
-        }
-
-        .contact-icon svg {
-            width: 20px;
-            height: 20px;
+            font-size: 20px;
         }
 
         .contact-details {
@@ -185,80 +200,84 @@
         }
 
         .contact-label {
-            font-size: 12px;
+            font-size: 13px;
             color: var(--text-light);
-            margin-bottom: 2px;
+            margin-bottom: 4px;
+            font-weight: 500;
         }
 
         .contact-value {
-    font-size: 14px;
-    font-weight: 500;
-    color: var(--text);
-    white-space: pre-wrap; /* Preserves line breaks and wraps text */
-    word-break: break-word; /* Breaks long words if necessary */
-    line-height: 1.6; /* Improves readability for multiline text */
-}
-#address {
-    margin: 0; /* Remove default paragraph margins */
-    max-width: 100%; /* Ensure it respects container width */
-}
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--text);
+            white-space: pre-wrap;
+            word-break: break-word;
+            line-height: 1.6;
+        }
+
+        #address {
+            margin: 0;
+            max-width: 100%;
+        }
+
         .social-links {
             display: flex;
             justify-content: center;
-            gap: 12px;
-            margin-top: 24px;
+            gap: 15px;
+            margin-top: 25px;
+            margin-bottom: 30px;
         }
 
         .social-link {
-            width: 40px;
-            height: 40px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: rgba(59, 130, 246, 0.1);
+            background: rgba(59, 130, 246, 0.12);
             color: var(--primary);
             transition: var(--transition);
             text-decoration: none;
+            font-size: 20px;
         }
 
         .social-link:hover {
             background: var(--primary);
             color: white;
-            transform: translateY(-3px);
-        }
-
-        .social-link svg {
-            width: 18px;
-            height: 18px;
+            transform: translateY(-5px) scale(1.1);
         }
 
         .download-btn {
             display: block;
             width: 100%;
-            padding: 12px;
-            background: var(--primary);
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
             color: white;
             border: none;
-            border-radius: 8px;
-            font-weight: 500;
+            border-radius: 12px;
+            font-weight: 600;
             cursor: pointer;
             transition: var(--transition);
-            margin-top: 24px;
+            margin-top: 10px;
             text-align: center;
             text-decoration: none;
+            font-size: 16px;
+            letter-spacing: 0.5px;
         }
 
         .download-btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
         }
 
         .loading {
-            padding: 40px;
+            padding: 60px 30px;
             text-align: center;
             color: var(--primary);
             font-weight: 500;
+            font-size: 18px;
         }
 
         .loading:after {
@@ -272,60 +291,138 @@
             60%, 100% { content: '...'; }
         }
 
+        .edit-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.25);
+            color: white;
+            padding: 10px 12px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: var(--transition);
+            z-index: 2;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .edit-button:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: rotate(15deg);
+        }
+
         @media (max-width: 480px) {
             .card {
-                border-radius: 12px;
+                border-radius: 20px;
+                max-width: 100%;
             }
             
             .card-header {
-                padding: 20px;
+                padding: 30px 20px 25px;
             }
             
             .profile-img-container {
-                width: 100px;
-                height: 100px;
+                width: 130px;
+                height: 130px;
             }
             
             .name {
-                font-size: 20px;
+                font-size: 24px;
+            }
+            
+            .title {
+                font-size: 16px;
             }
             
             .card-body {
-                padding: 20px;
+                padding: 25px 20px;
+            }
+            
+            .contact-item {
+                padding: 14px;
+            }
+            
+            .contact-icon {
+                width: 44px;
+                height: 44px;
+                font-size: 18px;
+            }
+            
+            .contact-value {
+                font-size: 15px;
             }
         }
 
         /* Animation */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .animated {
             animation: fadeIn 0.6s ease-out forwards;
         }
-		.edit-button {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 6px 10px;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: bold;
-    transition: background 0.3s ease;
-    z-index: 2;
-}
 
-.edit-button:hover {
-    background: rgba(255, 255, 255, 0.4);
-}
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .floating-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            opacity: 0.6;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 70px;
+            height: 70px;
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 50px;
+            height: 50px;
+            bottom: 20%;
+            left: 15%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
     </style>
 </head>
 <body>
     <div class="card">
+        <div class="floating-shapes">
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+            <div class="floating-shape"></div>
+        </div>
+        
         <div id="loading" class="loading">Loading contact information</div>
         
         <div id="profile" style="display: none;">
@@ -333,66 +430,76 @@
                 <div class="profile-img-container">
                     <img id="profile-image" src="" alt="Profile Image" class="profile-img">
                 </div>
-				<a id="edit-btn" class="edit-button" href="#" title="Edit">&#9998;</a>
+                <a id="edit-btn" class="edit-button" href="#" title="Edit">✎</a>
                 <h1 id="full-name" class="name"></h1>
                 <p id="job-title" class="title"></p>
                 <p id="company" class="company"></p>
             </div>
 
             <div class="card-body">
-                <h3 class="section-title">Contact</h3>
+                <h3 class="section-title"><i class="fas fa-id-card"></i> Contact Information</h3>
                 <ul class="contact-list">
-                    <li class="contact-item">
-                        <div class="contact-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-                                <polyline points="22,6 12,13 2,6"></polyline>
-                            </svg>
-                        </div>
-                        <div class="contact-details">
-                            <div class="contact-label">Email</div>
-                            <div id="email" class="contact-value"></div>
-                        </div>
-                    </li>
-                    <a id="phone-item" href="#" style="text-decoration: none; color: inherit;">
+                    <a href="#" id="email-link" style="text-decoration: none; color: inherit;">
                         <li class="contact-item">
                             <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-                                </svg>
+                                <i class="fas fa-envelope"></i>
                             </div>
                             <div class="contact-details">
-                                <div class="contact-label">Phone</div>
+                                <div class="contact-label">Email Address</div>
+                                <div id="email" class="contact-value"></div>
+                            </div>
+                        </li>
+                    </a>
+                    
+                    <a href="#" id="phone-link" style="text-decoration: none; color: inherit;">
+                        <li class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <div class="contact-label">Phone Number</div>
                                 <div id="phone" class="contact-value"></div>
                             </div>
                         </li>
                     </a>
-                    <li class="contact-item">
+                    
+                    <div class="contact-item">
                         <div class="contact-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-                                <circle cx="12" cy="10" r="3"></circle>
-                            </svg>
+                            <i class="fas fa-map-marker-alt"></i>
                         </div>
                         <div class="contact-details">
-    <div class="contact-label">Address</div>
-    <p id="address" class="contact-value"></p>
-</div>
-                    </li>
+                            <div class="contact-label">Business Address</div>
+                            <p id="address" class="contact-value"></p>
+                        </div>
+                    </div>
+                    
+                    <a href="#" id="website-link" style="text-decoration: none; color: inherit; display: none;">
+                        <li class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-globe"></i>
+                            </div>
+                            <div class="contact-details">
+                                <div class="contact-label">Website</div>
+                                <div id="website" class="contact-value"></div>
+                            </div>
+                        </li>
+                    </a>
                 </ul>
 
-                <h3 class="section-title">Connect</h3>
+                <h3 class="section-title"><i class="fas fa-share-alt"></i> Social Profiles</h3>
                 <div id="social-links" class="social-links">
                     <!-- Social links will be inserted here by JavaScript -->
                 </div>
 
-                <a href="#" class="download-btn" onclick="downloadContact(event)">Save to Contacts</a>
+                <a href="#" class="download-btn" onclick="downloadContact(event)">
+                    <i class="fas fa-download"></i> Save to Contacts
+                </a>
             </div>
         </div>
     </div>
 
     <script>
-        // Google Sheets ID and API key
+        // Google Sheets ID and API key (same as your original)
         const SHEET_ID = '1IpgOJOIXEOlWaKhPXFAV4kWGJVw8WlfIaJHWicFSK-c';
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
         const SHEET_NAME = 'BusinessCard';
@@ -400,13 +507,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const contactId = urlParams.get('id') || '111';
-			
-			// Set href of edit button
-			const editButton = document.getElementById('edit-btn');
-			if (editButton && contactId) {
-				editButton.href = `update.html?id=${encodeURIComponent(contactId)}`;
-			}
-			
+            
+            // Set href of edit button
+            const editButton = document.getElementById('edit-btn');
+            if (editButton && contactId) {
+                editButton.href = `update.html?id=${encodeURIComponent(contactId)}`;
+            }
+            
             const loadingElement = document.getElementById('loading');
             const profileElement = document.getElementById('profile');
 
@@ -482,11 +589,23 @@
             document.getElementById('company').textContent = data.company || '';
             
             // Contact info
-            document.getElementById('email').textContent = data.email || '';
+            const emailValue = data.email || '';
+            document.getElementById('email').textContent = emailValue;
+            document.getElementById('email-link').href = emailValue ? `mailto:${emailValue}` : '#';
+            
             const phoneValue = data.phone || '';
             document.getElementById('phone').textContent = phoneValue;
-            document.getElementById('phone-item').href = phoneValue ? `tel:${phoneValue}` : '#';
+            document.getElementById('phone-link').href = phoneValue ? `tel:${phoneValue.replace(/\D/g, '')}` : '#';
+            
             document.getElementById('address').textContent = data.address || '';
+            
+            // Website if available
+            const websiteValue = data.website || data.websiteurl || data['website url'] || data['website_url'] || '';
+            if (websiteValue) {
+                document.getElementById('website').textContent = websiteValue;
+                document.getElementById('website-link').href = websiteValue.startsWith('http') ? websiteValue : `https://${websiteValue}`;
+                document.getElementById('website-link').style.display = 'block';
+            }
             
             // Social links
             const socialLinksContainer = document.getElementById('social-links');
@@ -498,7 +617,22 @@
                 'instagram': ['instagram', 'instagramurl', 'instagram url', 'instagram_url'],
                 'facebook': ['facebook', 'facebookurl', 'facebook url', 'facebook_url'],
                 'twitter': ['twitter', 'twitterurl', 'twitter url', 'twitter_url'],
-                'github': ['github', 'githuburl', 'github url', 'github_url']
+                'github': ['github', 'githuburl', 'github url', 'github_url'],
+                'youtube': ['youtube', 'youtubeurl', 'youtube url', 'youtube_url'],
+                'dribbble': ['dribbble', 'dribbbleurl', 'dribbble url', 'dribbble_url'],
+                'behance': ['behance', 'behanceurl', 'behance url', 'behance_url']
+            };
+            
+            const socialIcons = {
+                linkedin: 'fab fa-linkedin-in',
+                whatsapp: 'fab fa-whatsapp',
+                instagram: 'fab fa-instagram',
+                facebook: 'fab fa-facebook-f',
+                twitter: 'fab fa-twitter',
+                github: 'fab fa-github',
+                youtube: 'fab fa-youtube',
+                dribbble: 'fab fa-dribbble',
+                behance: 'fab fa-behance'
             };
             
             let socialLinksFound = 0;
@@ -512,7 +646,7 @@
                     }
                 }
                 
-                if (socialUrl) {
+                if (socialUrl && socialIcons[platform]) {
                     socialLinksFound++;
                     if (!socialUrl.startsWith('http://') && !socialUrl.startsWith('https://') && !socialUrl.startsWith('mailto:') && !socialUrl.startsWith('tel:')) {
                         if (platform === 'whatsapp' && /^\d+$/.test(socialUrl.replace(/\D/g,''))) {
@@ -530,17 +664,10 @@
                     link.className = 'social-link';
                     link.setAttribute('aria-label', platform);
                     
-                    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-                    svg.setAttribute('viewBox', '0 0 24 24');
-                    svg.setAttribute('fill', 'none');
-                    svg.setAttribute('stroke', 'currentColor');
-                    svg.setAttribute('stroke-width', '2');
+                    const icon = document.createElement('i');
+                    icon.className = socialIcons[platform];
+                    link.appendChild(icon);
                     
-                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-                    path.setAttribute('d', getSocialIconPath(platform));
-                    svg.appendChild(path);
-                    
-                    link.appendChild(svg);
                     socialLinksContainer.appendChild(link);
                 }
             }
@@ -554,18 +681,6 @@
                 noSocialMsg.style.width = '100%';
                 socialLinksContainer.appendChild(noSocialMsg);
             }
-        }
-        
-        function getSocialIconPath(platform) {
-            const icons = {
-                linkedin: 'M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z M2 9h4v12H2z M6 4a2 2 0 1 1 0 4 2 2 0 0 1 0-4z',
-                whatsapp: 'M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z',
-                instagram: 'M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153a4.908 4.908 0 0 1 1.153 1.772c.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772 4.915 4.915 0 0 1-1.772 1.153c-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.248-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.217-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772A4.897 4.897 0 0 1 5.45 2.525c.638-.248 1.362-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 0 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z',
-                facebook: 'M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z',
-                twitter: 'M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z',
-                github: 'M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22'
-            };
-            return icons[platform] || '';
         }
         
         function downloadContact(e) {
@@ -614,6 +729,16 @@ ADR;TYPE=WORK:;;${address.replace(/\n/g, '\\n')}
             link.click();
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
+            
+            // Show feedback
+            const originalText = e.target.innerHTML;
+            e.target.innerHTML = '<i class="fas fa-check"></i> Contact Saved!';
+            e.target.style.background = 'linear-gradient(135deg, #10b981, #34d399)';
+            
+            setTimeout(() => {
+                e.target.innerHTML = originalText;
+                e.target.style.background = '';
+            }, 2000);
         }
     </script>
 </body>
