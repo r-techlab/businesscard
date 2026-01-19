@@ -769,6 +769,13 @@ textarea::placeholder {
                         <input type="url" id="twitter_url" name="twitter_url" placeholder="https://twitter.com/yourhandle">
                     </div>
                 </div>
+				
+                <div class="form-group">
+                    <label for="website">Website</label>
+                    <div class="input-wrapper">
+                        <input type="url" id="website" name="website" placeholder="https://www.yourURI.com">
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <label for="entered_password">Current Password</label>
@@ -794,8 +801,8 @@ textarea::placeholder {
         const SHEET_ID = '1IpgOJOIXEOlWaKhPXFAV4kWGJVw8WlfIaJHWicFSK-c';
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
         const SHEET_NAME = 'BusinessCard';
-        // Replace with your Apps Script web app URL
-        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwFgCqBbpbqwjbSu1LuAfSFAaezatpi15qjHe4XenPCocXISOtcWo6HdRLQ12L7PnY/exec';
+        // Replace with your Apps Script web app URL 
+		const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzSEjv4E1LxkSSvxGBcGgyoKF-tvnNg_qKBn86cDZCM1oPD1SMsvOouTC22Mtlx2_k/exec';
 
         // Get ID from URL parameter
         function getIdFromUrl() {
@@ -877,6 +884,7 @@ textarea::placeholder {
                         document.getElementById('instagram_url').value = profile.instagram_url || profile.instagramurl || '';
                         document.getElementById('facebook_url').value = profile.facebook_url || profile.facebookurl || '';
                         document.getElementById('twitter_url').value = profile.twitter_url || profile.twitterurl || '';
+						document.getElementById('website').value = profile.website  || '';
                         document.getElementById('current_password').value = profile.password || profile.password || '';
 
                         // Show form and hide loading
@@ -920,6 +928,7 @@ textarea::placeholder {
                 instagram_url: document.getElementById('instagram_url').value,
                 facebook_url: document.getElementById('facebook_url').value,
                 twitter_url: document.getElementById('twitter_url').value,
+				website: document.getElementById('website').value,
                 entered_password: document.getElementById('entered_password').value,
                 current_password: document.getElementById('current_password').value,
                 
