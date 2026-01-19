@@ -602,7 +602,7 @@
             // Website if available
             const websiteValue = data.website || data.websiteurl || data['website url'] || data['website_url'] || '';
             if (websiteValue) {
-                document.getElementById('website').textContent = websiteValue;
+                document.getElementById('website').textContent = 'Visit Website';
                 document.getElementById('website-link').href = websiteValue.startsWith('http') ? websiteValue : `https://${websiteValue}`;
                 document.getElementById('website-link').style.display = 'block';
             }
@@ -615,6 +615,7 @@
                 'linkedin': ['linkedin', 'linkedinurl', 'linkedin url', 'linkedin_url'],
                 'whatsapp': ['whatsapp', 'whatsappurl', 'whatsapp url', 'whatsapp_url'],
                 'instagram': ['instagram', 'instagramurl', 'instagram url', 'instagram_url'],
+				'website': ['website'],
                 'facebook': ['facebook', 'facebookurl', 'facebook url', 'facebook_url'],
                 'twitter': ['twitter', 'twitterurl', 'twitter url', 'twitter_url'],
                 'github': ['github', 'githuburl', 'github url', 'github_url'],
@@ -631,6 +632,7 @@
                 twitter: 'fab fa-twitter',
                 github: 'fab fa-github',
                 youtube: 'fab fa-youtube',
+				website: 'fas fa-globe',
                 dribbble: 'fab fa-dribbble',
                 behance: 'fab fa-behance'
             };
@@ -716,6 +718,7 @@ ADR;TYPE=WORK:;;${address.replace(/\n/g, '\\n')}
             if (socialLinks.facebook) vCard += `URL;type=Facebook:${socialLinks.facebook}\n`;
             if (socialLinks.twitter) vCard += `URL;type=Twitter:${socialLinks.twitter}\n`;
             if (socialLinks.github) vCard += `URL;type=GitHub:${socialLinks.github}\n`;
+			if (socialLinks.website) vCard += `URL;type=Website:${socialLinks.website}\n`;
             if (socialLinks.whatsapp) vCard += `URL;type=WhatsApp:${socialLinks.whatsapp}\n`;
 
             vCard += `END:VCARD`;
