@@ -272,6 +272,30 @@
             box-shadow: 0 10px 20px rgba(37, 99, 235, 0.25);
         }
 
+        .share-btn {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #10b981, #34d399);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 12px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+
+        .share-btn:hover {
+            background: linear-gradient(135deg, #059669, #10b981);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.25);
+        }
+
         .loading {
             padding: 60px 30px;
             text-align: center;
@@ -318,44 +342,43 @@
                 border-radius: 20px;
                 max-width: 100%;
             }
-            
+
             .card-header {
                 padding: 30px 20px 25px;
             }
-            
+
             .profile-img-container {
                 width: 130px;
                 height: 130px;
             }
-            
+
             .name {
                 font-size: 24px;
             }
-            
+
             .title {
                 font-size: 16px;
             }
-            
+
             .card-body {
                 padding: 25px 20px;
             }
-            
+
             .contact-item {
                 padding: 14px;
             }
-            
+
             .contact-icon {
                 width: 44px;
                 height: 44px;
                 font-size: 18px;
             }
-            
+
             .contact-value {
                 font-size: 15px;
             }
         }
 
-        /* Animation */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -422,9 +445,9 @@
             <div class="floating-shape"></div>
             <div class="floating-shape"></div>
         </div>
-        
+
         <div id="loading" class="loading">Loading contact information</div>
-        
+
         <div id="profile" style="display: none;">
             <div class="card-header">
                 <div class="profile-img-container">
@@ -441,43 +464,35 @@
                 <ul class="contact-list">
                     <a href="#" id="email-link" style="text-decoration: none; color: inherit;">
                         <li class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
+                            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
                             <div class="contact-details">
                                 <div class="contact-label">Email Address</div>
                                 <div id="email" class="contact-value"></div>
                             </div>
                         </li>
                     </a>
-                    
+
                     <a href="#" id="phone-link" style="text-decoration: none; color: inherit;">
                         <li class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone-alt"></i>
-                            </div>
+                            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
                             <div class="contact-details">
                                 <div class="contact-label">Phone Number</div>
                                 <div id="phone" class="contact-value"></div>
                             </div>
                         </li>
                     </a>
-                    
+
                     <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
+                        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div class="contact-details">
                             <div class="contact-label">Business Address</div>
                             <p id="address" class="contact-value"></p>
                         </div>
                     </div>
-                    
+
                     <a href="#" id="website-link" style="text-decoration: none; color: inherit; display: none;">
                         <li class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-globe"></i>
-                            </div>
+                            <div class="contact-icon"><i class="fas fa-globe"></i></div>
                             <div class="contact-details">
                                 <div class="contact-label">Website</div>
                                 <div id="website" class="contact-value"></div>
@@ -487,19 +502,20 @@
                 </ul>
 
                 <h3 class="section-title"><i class="fas fa-share-alt"></i> Social Profiles</h3>
-                <div id="social-links" class="social-links">
-                    <!-- Social links will be inserted here by JavaScript -->
-                </div>
+                <div id="social-links" class="social-links"></div>
 
                 <a href="#" class="download-btn" onclick="downloadContact(event)">
                     <i class="fas fa-download"></i> Save to Contacts
+                </a>
+
+                <a href="#" id="share-btn" class="share-btn" onclick="shareContact(event)">
+                    <i class="fas fa-share-alt"></i> Share This Card
                 </a>
             </div>
         </div>
     </div>
 
     <script>
-        // Google Sheets ID and API key (same as your original)
         const SHEET_ID = '1IpgOJOIXEOlWaKhPXFAV4kWGJVw8WlfIaJHWicFSK-c';
         const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
         const SHEET_NAME = 'BusinessCard';
@@ -507,13 +523,12 @@
         document.addEventListener('DOMContentLoaded', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const contactId = urlParams.get('id') || '111';
-            
-            // Set href of edit button
+
             const editButton = document.getElementById('edit-btn');
             if (editButton && contactId) {
                 editButton.href = `update.html?id=${encodeURIComponent(contactId)}`;
             }
-            
+
             const loadingElement = document.getElementById('loading');
             const profileElement = document.getElementById('profile');
 
@@ -524,9 +539,7 @@
 
             fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${SHEET_NAME}?key=${API_KEY}`)
                 .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`Network error: ${response.status}`);
-                    }
+                    if (!response.ok) throw new Error(`Network error: ${response.status}`);
                     return response.json();
                 })
                 .then(data => {
@@ -556,10 +569,9 @@
 
                             const profile = {};
                             headers.forEach((header, index) => {
-                                const normalizedHeader = header;
-                                profile[normalizedHeader] = index < foundProfileData.length ? foundProfileData[index] : '';
+                                profile[header] = index < foundProfileData.length ? foundProfileData[index] : '';
                             });
-                            
+
                             populateCard(profile);
                         } else {
                             loadingElement.textContent = `Contact with ID '${contactId}' not found.`;
@@ -573,91 +585,84 @@
                     loadingElement.textContent = 'Error loading contact: ' + error.message;
                 });
         });
-        
+
         function populateCard(data) {
-            // Set profile image with fallback
             const defaultImage = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png';
             const googleDriveImageBase = 'https://lh3.googleusercontent.com/d/';
             const imageId = data.image_id;
-            const profileImageUrl = imageId 
-                ? `${googleDriveImageBase}${imageId}=s220?authuser=0`
-                : defaultImage;
-            
+            const profileImageUrl = imageId ? `${googleDriveImageBase}${imageId}=s220?authuser=0` : defaultImage;
+
             document.getElementById('profile-image').src = data.profileimage || profileImageUrl || defaultImage;
             document.getElementById('full-name').textContent = data.fullname || data['full name'] || '';
             document.getElementById('job-title').textContent = data.jobtitle || data['job title'] || '';
             document.getElementById('company').textContent = data.company || '';
-            
-            // Contact info
+
             const emailValue = data.email || '';
             document.getElementById('email').textContent = emailValue;
             document.getElementById('email-link').href = emailValue ? `mailto:${emailValue}` : '#';
-            
+
             const phoneValue = data.phone || '';
             document.getElementById('phone').textContent = phoneValue;
             document.getElementById('phone-link').href = phoneValue ? `tel:${phoneValue.replace(/\D/g, '')}` : '#';
-            
+
             document.getElementById('address').textContent = data.address || '';
-            
-            // Website if available
+
             const websiteValue = data.website || data.websiteurl || data['website url'] || data['website_url'] || '';
             if (websiteValue) {
                 document.getElementById('website').textContent = 'Visit Website';
                 document.getElementById('website-link').href = websiteValue.startsWith('http') ? websiteValue : `https://${websiteValue}`;
                 document.getElementById('website-link').style.display = 'block';
             }
-            
-            // Social links
+
             const socialLinksContainer = document.getElementById('social-links');
-            socialLinksContainer.innerHTML = ''; 
-            
+            socialLinksContainer.innerHTML = '';
+
             const socialPlatformsMap = {
-                'linkedin': ['linkedin', 'linkedinurl', 'linkedin url', 'linkedin_url'],
-                'whatsapp': ['whatsapp', 'whatsappurl', 'whatsapp url', 'whatsapp_url'],
+                'linkedin':  ['linkedin', 'linkedinurl', 'linkedin url', 'linkedin_url'],
+                'whatsapp':  ['whatsapp', 'whatsappurl', 'whatsapp url', 'whatsapp_url'],
                 'instagram': ['instagram', 'instagramurl', 'instagram url', 'instagram_url'],
-				'website': ['website'],
-                'facebook': ['facebook', 'facebookurl', 'facebook url', 'facebook_url'],
-                'twitter': ['twitter', 'twitterurl', 'twitter url', 'twitter_url'],
-                'github': ['github', 'githuburl', 'github url', 'github_url'],
-                'youtube': ['youtube', 'youtubeurl', 'youtube url', 'youtube_url'],
-                'dribbble': ['dribbble', 'dribbbleurl', 'dribbble url', 'dribbble_url'],
-                'behance': ['behance', 'behanceurl', 'behance url', 'behance_url']
+                'website':   ['website'],
+                'facebook':  ['facebook', 'facebookurl', 'facebook url', 'facebook_url'],
+                'twitter':   ['twitter', 'twitterurl', 'twitter url', 'twitter_url'],
+                'github':    ['github', 'githuburl', 'github url', 'github_url'],
+                'youtube':   ['youtube', 'youtubeurl', 'youtube url', 'youtube_url'],
+                'dribbble':  ['dribbble', 'dribbbleurl', 'dribbble url', 'dribbble_url'],
+                'behance':   ['behance', 'behanceurl', 'behance url', 'behance_url']
             };
-            
+
             const socialIcons = {
-                linkedin: 'fab fa-linkedin-in',
-                whatsapp: 'fab fa-whatsapp',
+                linkedin:  'fab fa-linkedin-in',
+                whatsapp:  'fab fa-whatsapp',
                 instagram: 'fab fa-instagram',
-                facebook: 'fab fa-facebook-f',
-                twitter: 'fab fa-twitter',
-                github: 'fab fa-github',
-                youtube: 'fab fa-youtube',
-				website: 'fas fa-globe',
-                dribbble: 'fab fa-dribbble',
-                behance: 'fab fa-behance'
+                facebook:  'fab fa-facebook-f',
+                twitter:   'fab fa-twitter',
+                github:    'fab fa-github',
+                youtube:   'fab fa-youtube',
+                website:   'fas fa-globe',
+                dribbble:  'fab fa-dribbble',
+                behance:   'fab fa-behance'
             };
-            
+
             let socialLinksFound = 0;
             for (const [platform, variations] of Object.entries(socialPlatformsMap)) {
                 let socialUrl = null;
-                
                 for (const variant of variations) {
                     if (data[variant] && String(data[variant]).trim() !== '') {
                         socialUrl = String(data[variant]).trim();
                         break;
                     }
                 }
-                
+
                 if (socialUrl && socialIcons[platform]) {
                     socialLinksFound++;
                     if (!socialUrl.startsWith('http://') && !socialUrl.startsWith('https://') && !socialUrl.startsWith('mailto:') && !socialUrl.startsWith('tel:')) {
-                        if (platform === 'whatsapp' && /^\d+$/.test(socialUrl.replace(/\D/g,''))) {
-                            socialUrl = `https://wa.me/${socialUrl.replace(/\D/g,'')}`;
+                        if (platform === 'whatsapp' && /^\d+$/.test(socialUrl.replace(/\D/g, ''))) {
+                            socialUrl = `https://wa.me/${socialUrl.replace(/\D/g, '')}`;
                         } else {
                             socialUrl = 'https://' + socialUrl;
                         }
                     }
-                    
+
                     const link = document.createElement('a');
                     link.href = socialUrl;
                     link.target = '_blank';
@@ -665,15 +670,14 @@
                     link.title = platform.charAt(0).toUpperCase() + platform.slice(1);
                     link.className = 'social-link';
                     link.setAttribute('aria-label', platform);
-                    
+
                     const icon = document.createElement('i');
                     icon.className = socialIcons[platform];
                     link.appendChild(icon);
-                    
                     socialLinksContainer.appendChild(link);
                 }
             }
-            
+
             if (socialLinksFound === 0) {
                 const noSocialMsg = document.createElement('p');
                 noSocialMsg.textContent = 'No social links provided';
@@ -684,23 +688,22 @@
                 socialLinksContainer.appendChild(noSocialMsg);
             }
         }
-        
+
         function downloadContact(e) {
             e.preventDefault();
-            
+
             const fullName = document.getElementById('full-name').textContent;
             const jobTitle = document.getElementById('job-title').textContent;
             const email = document.getElementById('email').textContent;
             const phone = document.getElementById('phone').textContent;
             const address = document.getElementById('address').textContent;
             const company = document.getElementById('company').textContent;
-            
+
             const socialLinks = {};
             document.querySelectorAll('#social-links a').forEach(link => {
-                const platform = link.title.toLowerCase();
-                socialLinks[platform] = link.href;
+                socialLinks[link.title.toLowerCase()] = link.href;
             });
-            
+
             let vCard = `BEGIN:VCARD
 VERSION:3.0
 FN:${fullName}
@@ -711,16 +714,13 @@ EMAIL:${email}
 TEL;TYPE=CELL:${phone}
 ADR;TYPE=WORK:;;${address.replace(/\n/g, '\\n')}
 `;
-
-            // Add social links
-            if (socialLinks.linkedin) vCard += `URL;type=LinkedIn:${socialLinks.linkedin}\n`;
+            if (socialLinks.linkedin)  vCard += `URL;type=LinkedIn:${socialLinks.linkedin}\n`;
             if (socialLinks.instagram) vCard += `URL;type=Instagram:${socialLinks.instagram}\n`;
-            if (socialLinks.facebook) vCard += `URL;type=Facebook:${socialLinks.facebook}\n`;
-            if (socialLinks.twitter) vCard += `URL;type=Twitter:${socialLinks.twitter}\n`;
-            if (socialLinks.github) vCard += `URL;type=GitHub:${socialLinks.github}\n`;
-			if (socialLinks.website) vCard += `URL;type=Website:${socialLinks.website}\n`;
-            if (socialLinks.whatsapp) vCard += `URL;type=WhatsApp:${socialLinks.whatsapp}\n`;
-
+            if (socialLinks.facebook)  vCard += `URL;type=Facebook:${socialLinks.facebook}\n`;
+            if (socialLinks.twitter)   vCard += `URL;type=Twitter:${socialLinks.twitter}\n`;
+            if (socialLinks.github)    vCard += `URL;type=GitHub:${socialLinks.github}\n`;
+            if (socialLinks.website)   vCard += `URL;type=Website:${socialLinks.website}\n`;
+            if (socialLinks.whatsapp)  vCard += `URL;type=WhatsApp:${socialLinks.whatsapp}\n`;
             vCard += `END:VCARD`;
 
             const blob = new Blob([vCard], { type: 'text/vcard;charset=utf-8' });
@@ -732,16 +732,39 @@ ADR;TYPE=WORK:;;${address.replace(/\n/g, '\\n')}
             link.click();
             document.body.removeChild(link);
             window.URL.revokeObjectURL(url);
-            
-            // Show feedback
-            const originalText = e.target.innerHTML;
-            e.target.innerHTML = '<i class="fas fa-check"></i> Contact Saved!';
-            e.target.style.background = 'linear-gradient(135deg, #10b981, #34d399)';
-            
+
+            const btn = e.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-check"></i> Contact Saved!';
+            btn.style.background = 'linear-gradient(135deg, #10b981, #34d399)';
             setTimeout(() => {
-                e.target.innerHTML = originalText;
-                e.target.style.background = '';
+                btn.innerHTML = originalText;
+                btn.style.background = '';
             }, 2000);
+        }
+
+        function shareContact(e) {
+            e.preventDefault();
+            const fullName = document.getElementById('full-name').textContent;
+            const jobTitle = document.getElementById('job-title').textContent;
+            const shareUrl = window.location.href;
+            const btn = document.getElementById('share-btn');
+
+            if (navigator.share) {
+                navigator.share({
+                    title: fullName,
+                    text: `${fullName} - ${jobTitle}`,
+                    url: shareUrl
+                });
+            } else {
+                navigator.clipboard.writeText(shareUrl).then(() => {
+                    const originalText = btn.innerHTML;
+                    btn.innerHTML = '<i class="fas fa-check"></i> Link Copied!';
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                    }, 2000);
+                });
+            }
         }
     </script>
 </body>
